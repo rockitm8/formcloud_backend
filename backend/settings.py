@@ -28,7 +28,7 @@ DEBUG = False
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8080',
     'https://app.formcloud.ai',
-    '34.125.58.122'
+    'http://34.125.58.122'
 ]
 
 ALLOWED_HOSTS = [
