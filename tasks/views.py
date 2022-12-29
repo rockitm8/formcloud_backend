@@ -60,7 +60,7 @@ class TaskDetailViewSet(generics.RetrieveUpdateDestroyAPIView):
     domains = Domain.objects.filter(task=pk)
 
     task_detail = {
-      "contact_pages": len(domains.exclude(contact_page=None)),
+      "contact_pages": len(domains.exclude(contact_page="None")),
       "contact_forms": len(domains.filter(contact_form=True)),
       "forms_sent": len(domains.filter(form_sent=True)),
       "went_manually": len(domains.filter(went_over_manually=True)),
