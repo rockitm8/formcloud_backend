@@ -19,9 +19,10 @@ class TaskViewSet(generics.ListCreateAPIView):
     # user id from token
     token = Token.objects.get(key=authHeader)
     user = User.objects.get(user_name = token.user)
+
     request.data['user'] = user.id
     # task = self.create(request, *args, **kwargs)
-    # print("/////////////////////////////////")
+    #print("/////////////////////////////////")
     # print(task.data.id)
     # for d in request.data['domains']:
     #   Domain.objects.create(task=task, domain_name=d)
@@ -32,7 +33,6 @@ class TaskViewSet(generics.ListCreateAPIView):
     # user id from token
     token = Token.objects.get(key=authHeader)
     user = User.objects.get(user_name = token.user)
-
     tasks = Task.objects.filter(user=user)
     serializer = self.get_serializer(tasks, many=True)
 

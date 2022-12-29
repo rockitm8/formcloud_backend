@@ -26,7 +26,6 @@ class UserLoginViewSet(generics.GenericAPIView):
     email = serializer.data.get('email')
     password = serializer.data.get('password')
     user = User.objects.get(email=email, password=password)
-
     if user is not None:
       token = Token.objects.get(user=user)
       return Response({'token': token.key}, status=status.HTTP_200_OK)

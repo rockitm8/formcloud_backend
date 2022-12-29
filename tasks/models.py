@@ -22,7 +22,7 @@ class Domain(models.Model):
   task = models.ForeignKey(Task, on_delete=models.CASCADE)
   domain_name = models.CharField("Domain Name", max_length=100)
   reached_at = models.DateTimeField("Reached at", auto_now=True)
-  status = models.CharField("Status", max_length=30, default='')
+  status = models.CharField("Status", max_length=30, default='Running')
   contact_page = models.CharField("Contact Page", max_length=150, default='')
   contact_form = models.BooleanField("Contact Form", default=False)
   form_sent = models.BooleanField("Form Sent", default=False)
