@@ -20,7 +20,7 @@ from rest_framework.authtoken import views
 from rest_framework import routers
 
 from users.views import UserLoginViewSet, UserRegisterationViewSet
-from tasks.views import DomainViewSet, TaskViewSet
+from tasks.views import DomainViewSet, TaskDetailViewSet, TaskViewSet
 
 router = routers.DefaultRouter()
 router.register('', UserRegisterationViewSet, basename='user_register')
@@ -32,5 +32,6 @@ urlpatterns = [
     path('api/users/login/', UserLoginViewSet.as_view()),
     path('api/users/register/', include(router.urls)),
     path("api/tasks/", TaskViewSet.as_view()),
-    path("api/domains/<int:pk>/", DomainViewSet.as_view())
+    path("api/domains/<int:pk>/", DomainViewSet.as_view()),
+    path("api/taskdetail/<int:pk>/", TaskDetailViewSet.as_view())
 ]

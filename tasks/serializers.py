@@ -99,4 +99,3 @@ class DomainSerializer(serializers.ModelSerializer):
     model = Domain
     fields = ['task', 'domain_name', 'reached_at', 'status', 'contact_page', 'emails_found', 
               'contact_form', 'form_sent', 'went_over_manually', 'sent_manually']
-

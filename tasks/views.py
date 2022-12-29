@@ -51,3 +51,22 @@ class DomainViewSet(generics.ListCreateAPIView):
     serializer = self.get_serializer(domains, many=True)
 
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+class TaskDetailViewSet(generics.RetrieveUpdateDestroyAPIView):
+  serializer_class = DomainSerializer
+  queryset= Domain.objects.all()
+
+  def retrieve(self, request, pk):
+    domains = Domain.objects.filter(task=pk)
+
+    task_detail = {
+      "contact_pages": len(domains.exclude(contact_page=None)),
+      "contact_forms": len(domains.filter(contact_form=True)),
+      "forms_sent": len(domains.filter(form_sent=True)),
+      "went_manually": len(domains.filter(went_over_manually=True)),
+      "sent_manually": len(domains.filter(sent_manually=True)),
+      "domains": len(domains)
+    }
+    # serializer = self.get_serializer(task_detail, many=True)
+
+    return Response(task_detail, status=status.HTTP_200_OK)
