@@ -21,12 +21,11 @@ class UserLoginViewSet(generics.GenericAPIView):
   queryset = User.objects.all()
 
   def post(self, request):
-    
-
     serializer = UserLoginSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
     email = serializer.data.get('email')
-    user = User.objects.get(email=email)
+    password = serializer.data.get('password')
+    user = User.objects.get(email=email, password=password)
 
     if user is not None:
       token = Token.objects.get(user=user)
