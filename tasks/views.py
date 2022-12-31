@@ -38,6 +38,11 @@ class TaskViewSet(generics.ListCreateAPIView):
 
     return Response(serializer.data, status=status.HTTP_200_OK)
 
+  def get(self, request, pk):
+    task = Task.objects.get(id=pk)
+
+    return Response(task.task_name, status=status.HTTP_200_OK)
+
 class DomainViewSet(generics.ListCreateAPIView):
   serializer_class = DomainSerializer
   queryset= Domain.objects.all()
