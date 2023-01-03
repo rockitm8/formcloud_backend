@@ -8,10 +8,10 @@ class UserSerializer(serializers.ModelSerializer):
   # phone_number = serializers.IntegerField(source="userprofile.phone_number")
   class Meta:
     model = User
-    fields = ('user_name', 'password', 'email', 'first_name', 'last_name')
+    fields = ('password', 'email', 'first_name', 'last_name')
 
   def create(self, validated_data):
-    user = User.objects.create(user_name=validated_data['user_name'], email=validated_data['email'],
+    user = User.objects.create(email=validated_data['email'],
        password=validated_data['password'], first_name=validated_data['first_name'], last_name=validated_data['last_name'])
 
     return user

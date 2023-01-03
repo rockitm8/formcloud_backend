@@ -11,13 +11,12 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseU
 # Create your models here.
 
 class CustomUserManager(BaseUserManager):
-  def create_user(self, email, user_name, password=None, first_name='', last_name=''):
+  def create_user(self, email, password=None, first_name='', last_name=''):
     if not email:
       raise ValueError('User must have an email address')
 
     user = self.model(
       email=self.normalize_email(email),
-      user_name=user_name,
       first_name=first_name,
       last_name=last_name
     )
@@ -25,14 +24,13 @@ class CustomUserManager(BaseUserManager):
     user.save(using=self._db)
     return user
 
-  def create_superuser(self, email, user_name, password=None):
+  def create_superuser(self, email, password=None):
       """
       Creates and saves a superuser with the given email, name, tc and password.
       """
       user = self.create_user(
           email,
-          password=password,
-          user_name=user_name
+          password=password
       )
       user.is_superuser = True
       user.save(using=self._db)
@@ -72,7 +70,6 @@ class User(AbstractBaseUser, PermissionsMixin):
       unique=True,)
   first_name = models.CharField(max_length=30)
   last_name = models.CharField(max_length=30)
-  user_name = models.CharField(max_length=50)
 
   is_staff = models.BooleanField(default=True)
   is_active = models.BooleanField(default=True)
@@ -81,10 +78,9 @@ class User(AbstractBaseUser, PermissionsMixin):
   objects = CustomUserManager()
 
   USERNAME_FIELD = 'email'
-  REQUIRED_FIELDS = ['user_name']
 
   def __str__(self):
-    return self.user_name
+    return self.email
   
 
   class meta:
